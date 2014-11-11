@@ -1,0 +1,53 @@
+* 1.0
+** Blueprints
+*** DONE Implement custom output feature
+**** DONE Implement custom output feature
+**** DONE Create function for custom output
+**** DONE Test function
+**** DONE Output information in a predictable manner
+**** DONE Allow user to turn off labels and allow custom separators
+**** DONE Change the name of proper_order() to something more appropriate
+**** DONE Add option for time-stamp
+*** DONE Implement the fancy print mode
+ - Will not be implementing curses, or other curses like framework, for this release.
+ - Implement basic fancy_print() using print functions. [DONE]
+*** DONE Improve the state of in-code documentation
+*** DONE Include all the necessary files for the project
+ - Files needed:
+   - iiu.py [DONE]
+   - iiu.org (Change Log) [DONE]
+   - License [DONE]
+   - README [DONE]
+   - man pages [DONE]
+   - info pages [CANCELED]
+     - info pages will be implemented in a future relese
+*** DONE Bug #1267236
+ - [[https://bugs.launchpad.net/iiu/+bug/1267236][iiu reports a domain doesn't exist when there's no response from server.]]
+*** DONE Imporove argparser
+*** DONE Bug #1268758
+ - [[https://bugs.launchpad.net/iiu/+bug/1268758][There's an fatal error when NULL is passed into response_code()]]
+** Changelog
+ - [2014-1-10]
+   - Edited the output for when user enters invalid -r option.
+   - Added feature in print_return_only() to allow the user to turn off labels.
+   - Changed the function proper_order() to sort_order()
+   - Added -l to the output box of valid options when using -r
+   - Added error if user tries to only pass -r l without other options
+   - Implemented time-stamp feature
+   - Added files README
+   - Added license statement to iiu.py
+   - Fixed bug #1267236
+   - Improved Doc-Strings
+   - Populated the README file
+ - [2014-1-13]
+   - Implemented print_fancy()
+     - NOTE: Will use a more advanced framework in future releases.
+   - Improved argparser
+ - [2014-1-14]
+   - Canceled plans to implement info pages
+   - Added project's man page
+   - Fixed the name of the program in print_fancy()
+ - [2014-1-15]
+   - Fixed bug #1268758
+   - Slightly changed the wording in the program's description
+   - Renamed iiu.org to ChangeLog

@@ -30,6 +30,7 @@ import urllib.request
 version = '1.0 alpha'
 app = 'iiu'
 
+
 def main():
     """
 
@@ -149,6 +150,7 @@ def clean_list(lst):
     """
 
     cleaned_list = []
+    element = None
 
     for element in lst:
         if element[-1:] == ',':
@@ -163,7 +165,7 @@ def print_fancy(url):
     """Prints data in using multilines.
 
     Takes the URL which the user would like to check and displays it on the
-    screen using multilines. The reason for this print option is to be pleaseing
+    screen using multi-lines. The reason for this print option is to be pleasing
     to the eyes of the user, it's not meant to be used by scripts.
 
     data_list scheme:
@@ -183,15 +185,14 @@ def print_fancy(url):
     else:                       # a KeyError.
         response_code = http.client.responses[int(status[1][4])]
 
-
     os.system('clear')  # Send 'clear' to terminal. Will cause an error in Windows
     print('')
-    print('                  _  _' )
+    print('                  _  _')
     print('                 (_)(_)')
     print('                  _  _  _   _')
     print('                 | || || | | |')
     print('                 | || || |_| |')
-    print('                 |_||_| \__,_|')
+    print('                 |_||_| \\__,_|')
     print('')
     print('')
     print('                The site is {}'.format(status[0]))
@@ -229,9 +230,9 @@ def print_ip(url):
         print('{}'.format(status[1][3]))
     elif status[0] == 'UP':
         try:                                   # status[1][3] can be NULL which causes a ValueError
-            print ('{}'.format(status[1][3]))
+            print('{}'.format(status[1][3]))
         except ValueError:
-            print ('{}'.format(status[1][3]))
+            print('{}'.format(status[1][3]))
 
     return 0
 
@@ -266,12 +267,12 @@ def print_return_only(url, args, label_state):
     valid_args = ['c', 's', 'd', 'p', 'i', 't']
     args = list(set(args))  # Removes duplicate options
     user_lst = []
-    args_dic = {'c' : ['0', '{}', time_stamp()],
-                'd' : ['1', 'domain={}', data_list[0]],
-                'i' : ['2', 'ip={}', data_list[3]],
-                'p' : ['3', 'port={}', data_list[1]],
-                's' : ['4', 'status_code={}', data_list[4]],
-                't' : ['5', 'response_time={}', data_list[5]]
+    args_dic = {'c': ['0', '{}', time_stamp()],
+                'd': ['1', 'domain={}', data_list[0]],
+                'i': ['2', 'ip={}', data_list[3]],
+                'p': ['3', 'port={}', data_list[1]],
+                's': ['4', 'status_code={}', data_list[4]],
+                't': ['5', 'response_time={}', data_list[5]]
                 }
 
     for option in args:
@@ -312,6 +313,7 @@ def print_return_only(url, args, label_state):
 
     return 0
 
+
 def print_simple(url):
     """Prints a simple output.
 
@@ -323,9 +325,7 @@ def print_simple(url):
     The second list contains the data returned from isitup.org.
 
     data_list scheme:
-        [[status_of_site], ['domain', 'port',
-         'status code', 'response ip','response code',
-          response time']]
+        [[status_of_site], ['domain', 'port','status code', 'response ip', 'response code', response time']]
 
     """
 
@@ -339,43 +339,41 @@ def print_simple(url):
     elif status[0] == 'UP':
         try:
             response_code = http.client.responses[int(status[1][4])]  # Returns HTTP code's meaning
-            print ('{0} Domain: {1} ({2}) Response Time: {3} HTTP: {4} {5}'.format(time_stamp(),
-                                                                                   status[1][0],
-                                                                                   status[1][3],
-                                                                                   status[1][5],
-                                                                                   status[1][4],
-                                                                                   response_code
-                                                                                    ))
+            print('{0} Domain: {1} ({2}) Response Time: {3} HTTP: {4} {5}'.format(time_stamp(),
+                                                                                  status[1][0],
+                                                                                  status[1][3],
+                                                                                  status[1][5],
+                                                                                  status[1][4],
+                                                                                  response_code
+                                                                                  ))
         except ValueError:
-            print ('{0} Domain: {1} ({2}) Response Time: {3} HTTP: {4}'.format(time_stamp(),
-                                                                               status[1][0],
-                                                                               status[1][3],
-                                                                               status[1][5],
-                                                                               status[1][4]
-                                                                                ))
+            print('{0} Domain: {1} ({2}) Response Time: {3} HTTP: {4}'.format(time_stamp(),
+                                                                              status[1][0],
+                                                                              status[1][3],
+                                                                              status[1][5],
+                                                                              status[1][4]
+                                                                              ))
 
 
 def sort_order(lst):
-    """Takes a list of user choosen options and returns it in a perdictable order.
+    """Takes a list of user chosen options and returns it in a predictable order.
 
-    Since dictionaries do not have a perdictable order, this function takes
-    the user's options choosen and orders it in a perdectable manner. It does
+    Since dictionaries do not have a predictable order, this function takes
+    the user's options chosen and orders it in a perfectible manner. It does
     this by looking at the first number in the first list element. After the
     list is ordered, it returns the ordered list with the prefixed number
-    stirped out (ex opt[2:]). The number prefix is hard coded in the
-    print_return_only() fuction in the args_dic dictionary.
+    stripped out (ex opt[2:]). The number prefix is hard coded in the
+    print_return_only() function in the args_dic dictionary.
 
     ARG:
-        lst The list of choosen options by the user in random order
+        lst The list of chosen options by the user in random order
 
     RETURN:
-        ordered_lst The new list in a perdictable order
+        ordered_lst The new list in a predictable order
 
     """
 
     ordered_lst = []
-    sorted_lst = []
-
     sorted_lst = sorted(lst)
 
     for opt in sorted_lst:
@@ -398,7 +396,7 @@ def request_url(url):
 
     """
 
-    headers = {'User-Agent' : app + '/' + version}
+    headers = {'User-Agent': app + '/' + version}
 
     url = 'http://isitup.org/' + url + '.txt'
     req = urllib.request.Request(url, None, headers)
@@ -433,11 +431,11 @@ def response_status(lst):
     """
 
     if lst[0] == lst[3]:
-        return ('NONRESPONSIVE', lst)
+        return 'NONRESPONSIVE', lst
     elif lst[5] == 'NULL' and lst[4] == 'NULL':
-        return ('DOWN', lst)
+        return 'DOWN', lst
     else:
-        return ('UP',lst)
+        return 'UP', lst
 
 
 def time_stamp():

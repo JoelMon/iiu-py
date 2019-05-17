@@ -5,8 +5,11 @@ verify_ssl = true
 
 [dev-packages]
 sphinx = "*"
+pytest = "*"
+pytest-cov = "*"
 
 [packages]
+click = "*"
 
 [requires]
 python_version = "3.7"

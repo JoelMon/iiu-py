@@ -1,22 +1,23 @@
 #!/usr/bin/env python3
 
 """
-Copyright 2014 Joel Montes de Oca <JoelMontes01@gmail.com>
+Copyright 2014-2019 Joel Montes de Oca <JoelMontes01@gmail.com>
 
-This file is part of iiu.
+**iiu** (Is It Up?) is a command line tool used to check if a website is
+available from outside of your own network. It accomplishes this by using the
+freely available *isitup.org* API. iiu's output is customizable making it simple
+to incorporate it into a script.
 
-iiu is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+iiu is free software: you can redistribute it and/or modify it under the terms
+of the GNU General Public License as published by the Free Software Foundation,
+either version 3 of the License, or (at your option) any later version.
 
-iiu is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
+iiu is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with iuu. If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU General Public License along with
+iuu. If not, see <http://www.gnu.org/licenses/>.
 """
 
 import argparse
@@ -31,15 +32,7 @@ app = 'iiu'
 
 
 def main():
-    """
-
-    iiu is a command line tool to aid system administrators when deploying
-    or maintaining web servers. iiu is used to check if a web site is
-    available from outside of your own network. It accomplishes this by using
-    the freely available isitup.org API. iiu's output is customizable
-    making it simple to incorporate it into a script.
-
-    """
+    """The main function of iiu"""
 
     parser = argparse.ArgumentParser(description='{0} checks to see if a website is \
                                                  accessible outside of your network.'.format(app))
@@ -130,21 +123,22 @@ def main():
 
 
 def clean_list(lst):
-    """Cleans the returned list to remove the trailing ','
+    """
+    Cleans the returned list to remove the trailing ','
 
-    isitup.org returns a string with commas (','), when the string
-    is converted to a list, the list elements has a ',' appended
+    **isitup.org** returns a string with commas (','), when the string
+    is converted to a list, the list elements has a `','` appended
     to the end of each element except for the last. This function
     removes the trailing comma from each element if it exists.
 
-    Example of dirty list:
-    ['Domain.com,', '80,', '1,', '255.255.255.255,', '301,', '0.104']
+    :Example: Dirty List:
 
-    ARG:
-        takes lst as the list with the trailing ','
+        ['Domain.com,', '80,', '1,', '255.255.255.255,', '301,', '0.104']
 
-    Returns:
-        returns a new list without the trailing ','
+    :param lst: List to be cleaned
+    :type lst: list
+    :return: A new list with the trailing ',' removed
+    :rtype: list
 
     """
 
@@ -161,19 +155,19 @@ def clean_list(lst):
 
 
 def print_fancy(url):
-    """Prints data in using multilines.
+    """Prints data using multi-lines
 
-    Takes the URL which the user would like to check and displays it on the
-    screen using multi-lines. The reason for this print option is to be pleasing
-    to the eyes of the user, it's not meant to be used by scripts.
+    Takes the **URL** which the user would like to check and displays it on the
+    screen using multiple lines. This mode is meant to look nice and be easy
+    to read for the user.
 
-    data_list scheme:
-        ['domain', 'port',
-         'status code', 'response ip','response code',
-          response time']]
+    :Example: `data_list` scheme:
 
-    ARG:
-        url - The URL which the user would like to check.
+        `['domain', 'port', 'status code', 'response ip','response code', response time']`
+
+    :param url: he URL which the user would like to check
+    :return: 0
+
 
     """
 
@@ -208,15 +202,15 @@ def print_fancy(url):
 
 
 def print_ip(url):
-    """Prints only the IP address of the website.
+    """Prints only the IP address of the website
 
-    Only prints the IP address of the URL entered. No time-stamp is
-    provided in this mode. If time-stamp is needed then the '-r i'
-    should be used. This function is meant to be used as a shortcut
-    to getting an IP address.
+    Only prints the *IP address* of the *URL* entered. If time-stamp is
+    needed then the `-r i` should be used. This function is meant to
+    be used as a shortcut to getting an IP address.
 
-    ARGS:
-        url the URL of the site to check
+    :param url: The URL of the site to be checked
+    :type url: str
+    :return 0
 
     """
 
@@ -237,27 +231,26 @@ def print_ip(url):
 
 
 def print_return_only(url, args, label_state):
-    """Returns only the information the user requests.
+    """Returns only the information the user requests
 
-    The print_return_only() takes url, args, and
-    label_state as arguments and then prints on the
-    screen the information the user wants.
+    The `print_return_only` function takes the arguments the user wants
+    and prints them.
 
-    data_list scheme:
+    **data_list scheme**:
         ['domain', 'port', 'status code', 'response ip',
          'response code', response time']
 
-    args_dic scheme:
+    **args_dic scheme**:
         {user_options : [order_index,
                          string to display,
                          loc of data in data_list
-                         ]
+                         ]}
 
-    ARG:
-        url         This is the URL the user wishes to check
-        args        The options chosen by the user to display
-        label_state Whether the user wants to have the
-                    information displayed with labels.
+    :param url: The URL to be checked
+    :type url: str
+    :param args: The options the user would like to have printed
+    :param label_state: Whether the user wants to have the information displayed with labels.
+    :return: 0
 
     """
 
@@ -355,20 +348,19 @@ def print_simple(url):
 
 
 def sort_order(lst):
-    """Takes a list of user chosen options and returns it in a predictable order.
+    """Takes a list of user chosen options and returns it in a predictable order
 
     Since dictionaries do not have a predictable order, this function takes
     the user's options chosen and orders it in a perfectible manner. It does
     this by looking at the first number in the first list element. After the
     list is ordered, it returns the ordered list with the prefixed number
     stripped out (ex opt[2:]). The number prefix is hard coded in the
-    print_return_only() function in the args_dic dictionary.
+    `print_return_only` function in the `args_dic` dictionary.
 
-    ARG:
-        lst The list of chosen options by the user in random order
-
-    RETURN:
-        ordered_lst The new list in a predictable order
+    :param lst: The list of chosen options by the user in random order
+    :type lst: list
+    :return: The new list in a predictable order
+    :rtype: list
 
     """
 
@@ -381,17 +373,17 @@ def sort_order(lst):
 
 
 def request_url(url):
-    """Request body of the URL entered.
+    """Request body of the URL entered
 
-    Requests the URL and returns the body of the page from http://isitup.org.
+    Requests the *URL* and returns the body of the page from http://isitup.org.
     It also cleans it using the clean_list(lst) function. Everything gets
     returned as a string.
 
-    ARG:
-        url: the url that will be sent to http://isitup.org
+    :param url: The url that will be sent to http://isitup.org
+    :type url: str
 
-    Returns:
-        returns the body of the http://isitup.org
+    return: The body of the http://isitup.org
+    :rtype:str
 
     """
 
@@ -407,25 +399,23 @@ def request_url(url):
 
 
 def response_status(lst):
-    """Returns the status of the website along with the lst in a tuple.
+    """Returns the status of the website along with the lst in a tuple
 
-    Takes lst and checks to see if the website is one of the three states,
+    Takes `lst` and checks to see if the website is one of the three states,
     then return the state of the site plus the list that was passed into
-    response_status(lst).
+    `response_status(lst)`.
 
-    States:
+    **States**:
 
-        NONRESPONSIVE - Site does not return an IP address
-        DOWN          - Site is down but returns an IP
-        UP            - Site is up
+        *NONRESPONSIVE* - Site does not return an IP address
+        *DOWN*          - Site is down but returns an IP
+        *UP*            - Site is up
 
-    ARG:
-        lst - The response from http:isitup.org after it
-              has been cleaned.
+    :param lst: The response from `http:isitup.org` after it has been cleaned.
+    :type lst:str
 
-    RETURNS:
-        A tuple containing the state of the site as a string
-        and the original list passed in.
+    :return: The state of the site as a string and the original list passed in.
+    :rtype: tuple
 
     """
 
@@ -438,12 +428,13 @@ def response_status(lst):
 
 
 def time_stamp():
-    """Produces a time stamp.
+    """Produces a time stamp
 
-    When called, it creates a time stamp and returns it.
+    When `time_stamp` is called, it creates a time stamp and returns it.
 
-    Not sure if this function works as expectd
-    under other platforms.
+    .. warning:: Not sure if this function works as expected under other platforms.
+
+    :return: Current timestamp
 
     """
 
@@ -453,18 +444,16 @@ def time_stamp():
 
 
 def url_sanity(url):
-    """Strips invalid prefixes from url.
+    """Strips invalid prefixes from url
 
-    isitup.org does not accept a URLs with a 'http://' or http:
+    `isitup.org` does not accept a URLs with a *http://* or *http:*
     prefix. This function checks to see if the user entered the prefix
-    and strips it from the url if so. 'https://' and 'https:' are also
+    and strips it from the url if so. *https://* and *https:8 are also
     stripped.
 
-    ARGS:
-        takes url as the URL the user entered
+    :param url: The URL entered by the user
 
-    RETURNS:
-        returns url with the invalid prefixes removed if found
+    :return: The URL with the invalid prefixes removed if found
 
     """
 
